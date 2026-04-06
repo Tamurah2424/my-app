@@ -2,38 +2,43 @@
 {% block content %}
 <section class="form-wrap">
   <div>
-    <p class="eyebrow">Booking request</p>
-    <h1>Reserve {{ cast['name'] }}</h1>
-    <p class="subtitle">This demo intentionally supports only lawful, non-adult companion reservations.</p>
+    <p class="eyebrow">予約申請</p>
+    <h1>{{ cast['name'] }} を予約する</h1>
+    <p class="subtitle">このデモは、健全な予約サービス向けの試作版です。</p>
   </div>
 
   <form method="post" class="form card-form">
-    <label>Name
+    <label>お名前
       <input name="customer_name" value="{{ form.get('customer_name', '') }}" required>
     </label>
-    <label>Email
+
+    <label>メールアドレス
       <input type="email" name="customer_email" value="{{ form.get('customer_email', '') }}" required>
     </label>
+
     <div class="grid two">
-      <label>Date
+      <label>日付
         <input type="date" name="booking_date" value="{{ form.get('booking_date', '') }}" required>
       </label>
-      <label>Start time
+      <label>開始時間
         <input type="time" name="start_time" value="{{ form.get('start_time', '') }}" required>
       </label>
     </div>
+
     <div class="grid two">
-      <label>Duration (hours)
+      <label>利用時間（時間）
         <input type="number" min="1" max="12" name="duration_hours" value="{{ form.get('duration_hours', '2') }}" required>
       </label>
-      <label>Meeting location
-        <input name="location" value="{{ form.get('location', '') }}" placeholder="Shibuya Station" required>
+      <label>待ち合わせ場所
+        <input name="location" value="{{ form.get('location', '') }}" placeholder="渋谷駅" required>
       </label>
     </div>
-    <label>Notes
-      <textarea name="notes" rows="4" placeholder="Cafe meetup, shopping, etc.">{{ form.get('notes', '') }}</textarea>
+
+    <label>備考・ご要望
+      <textarea name="notes" rows="4" placeholder="カフェ、買い物、食事など">{{ form.get('notes', '') }}</textarea>
     </label>
-    <button class="button" type="submit">Submit booking</button>
+
+    <button class="button" type="submit">予約を送信する</button>
   </form>
 </section>
 {% endblock %}
