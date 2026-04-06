@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="center-box">
+  <p class="eyebrow">Submitted</p>
+  <h1>Your request for {{ cast['name'] }} was sent</h1>
+  <p class="subtitle">In this MVP, all bookings enter the admin queue as <strong>pending</strong>.</p>
+  <div class="actions center">
+    <a class="button" href="{{ url_for('home') }}">Back to home</a>
+    <a class="button secondary" href="{{ url_for('admin_bookings') }}">Open admin queue</a>
+  </div>
+</section>
+{% endblock %}
