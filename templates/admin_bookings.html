@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 <section>
-  <p class="eyebrow">Admin</p>
-  <h1>Booking management</h1>
-  <p class="subtitle">A simple admin screen for status changes. Add authentication before any real deployment.</p>
+  <p class="eyebrow">管理画面</p>
+  <h1>予約管理</h1>
+  <p class="subtitle">予約状況を変更できる簡易管理画面です。本番公開前に必ず認証機能を追加してください。</p>
 
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th><th>Cast</th><th>Customer</th><th>Date</th><th>Start</th><th>Hours</th><th>Location</th><th>Status</th><th>Action</th>
+        <th>ID</th>
+        <th>キャスト</th>
+        <th>予約者</th>
+        <th>日付</th>
+        <th>開始時間</th>
+        <th>利用時間</th>
+        <th>場所</th>
+        <th>状態</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -21,21 +29,33 @@
         <td>{{ booking['start_time'] }}</td>
         <td>{{ booking['duration_hours'] }}</td>
         <td>{{ booking['location'] }}</td>
-        <td><span class="badge">{{ booking['status'] }}</span></td>
+        <td>
+          <span class="badge">
+            {% if booking['status'] == 'pending' %}
+              確認待ち
+            {% elif booking['status'] == 'confirmed' %}
+              確定
+            {% elif booking['status'] == 'cancelled' %}
+              キャンセル
+            {% else %}
+              {{ booking['status'] }}
+            {% endif %}
+          </span>
+        </td>
         <td>
           <form method="post" class="inline-form">
             <input type="hidden" name="booking_id" value="{{ booking['id'] }}">
             <select name="status">
-              {% for option in ['pending', 'confirmed', 'cancelled'] %}
-              <option value="{{ option }}" {% if booking['status'] == option %}selected{% endif %}>{{ option }}</option>
-              {% endfor %}
+              <option value="pending" {% if booking['status'] == 'pending' %}selected{% endif %}>確認待ち</option>
+              <option value="confirmed" {% if booking['status'] == 'confirmed' %}selected{% endif %}>確定</option>
+              <option value="cancelled" {% if booking['status'] == 'cancelled' %}selected{% endif %}>キャンセル</option>
             </select>
-            <button class="button secondary small" type="submit">Save</button>
+            <button class="button secondary small" type="submit">保存</button>
           </form>
         </td>
       </tr>
       {% else %}
-      <tr><td colspan="9">No bookings yet.</td></tr>
+      <tr><td colspan="9">まだ予約はありません。</td></tr>
       {% endfor %}
     </tbody>
   </table>
