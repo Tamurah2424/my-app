@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="form-wrap">
+  <div>
+    <p class="eyebrow">Booking request</p>
+    <h1>Reserve {{ cast['name'] }}</h1>
+    <p class="subtitle">This demo intentionally supports only lawful, non-adult companion reservations.</p>
+  </div>
+
+  <form method="post" class="form card-form">
+    <label>Name
+      <input name="customer_name" value="{{ form.get('customer_name', '') }}" required>
+    </label>
+    <label>Email
+      <input type="email" name="customer_email" value="{{ form.get('customer_email', '') }}" required>
+    </label>
+    <div class="grid two">
+      <label>Date
+        <input type="date" name="booking_date" value="{{ form.get('booking_date', '') }}" required>
+      </label>
+      <label>Start time
+        <input type="time" name="start_time" value="{{ form.get('start_time', '') }}" required>
+      </label>
+    </div>
+    <div class="grid two">
+      <label>Duration (hours)
+        <input type="number" min="1" max="12" name="duration_hours" value="{{ form.get('duration_hours', '2') }}" required>
+      </label>
+      <label>Meeting location
+        <input name="location" value="{{ form.get('location', '') }}" placeholder="Shibuya Station" required>
+      </label>
+    </div>
+    <label>Notes
+      <textarea name="notes" rows="4" placeholder="Cafe meetup, shopping, etc.">{{ form.get('notes', '') }}</textarea>
+    </label>
+    <button class="button" type="submit">Submit booking</button>
+  </form>
+</section>
+{% endblock %}

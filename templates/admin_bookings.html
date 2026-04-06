@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+  <p class="eyebrow">Admin</p>
+  <h1>Booking management</h1>
+  <p class="subtitle">A simple admin screen for status changes. Add authentication before any real deployment.</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th><th>Cast</th><th>Customer</th><th>Date</th><th>Start</th><th>Hours</th><th>Location</th><th>Status</th><th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr>
+        <td>#{{ booking['id'] }}</td>
+        <td>{{ booking['cast_name'] }}</td>
+        <td>{{ booking['customer_name'] }}<br><small>{{ booking['customer_email'] }}</small></td>
+        <td>{{ booking['booking_date'] }}</td>
+        <td>{{ booking['start_time'] }}</td>
+        <td>{{ booking['duration_hours'] }}</td>
+        <td>{{ booking['location'] }}</td>
+        <td><span class="badge">{{ booking['status'] }}</span></td>
+        <td>
+          <form method="post" class="inline-form">
+            <input type="hidden" name="booking_id" value="{{ booking['id'] }}">
+            <select name="status">
+              {% for option in ['pending', 'confirmed', 'cancelled'] %}
+              <option value="{{ option }}" {% if booking['status'] == option %}selected{% endif %}>{{ option }}</option>
+              {% endfor %}
+            </select>
+            <button class="button secondary small" type="submit">Save</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="9">No bookings yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
