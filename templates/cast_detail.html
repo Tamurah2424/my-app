@@ -3,22 +3,22 @@
 <section class="detail-layout">
   <img src="{{ cast['image_url'] }}" alt="{{ cast['name'] }}" class="detail-image">
   <div>
-    <p class="eyebrow">Cast profile</p>
+    <p class="eyebrow">キャストプロフィール</p>
     <h1>{{ cast['name'] }}</h1>
-    <p class="subtitle">{{ cast['age'] }} years old · {{ cast['area'] }}</p>
+    <p class="subtitle">{{ cast['age'] }}歳 ・ {{ cast['area'] }}</p>
     <p>{{ cast['bio'] }}</p>
-    <p><strong>Tags:</strong> {{ cast['tags'] }}</p>
-    <p><strong>Rate:</strong> JPY {{ '{:,}'.format(cast['hourly_price']) }} / hour</p>
-    <a class="button" href="{{ url_for('book_cast', cast_id=cast['id']) }}">Reserve this cast</a>
+    <p><strong>タグ：</strong>{{ cast['tags'] }}</p>
+    <p><strong>料金：</strong>¥{{ '{:,}'.format(cast['hourly_price']) }} / 時間</p>
+    <a class="button" href="{{ url_for('book_cast', cast_id=cast['id']) }}">このキャストを予約する</a>
   </div>
 </section>
 
 <section>
-  <h2>Upcoming slots already requested</h2>
+  <h2>すでに予約申請が入っている時間帯</h2>
   {% if upcoming %}
   <table class="table">
     <thead>
-      <tr><th>Date</th><th>Start</th><th>Hours</th><th>Status</th></tr>
+      <tr><th>日付</th><th>開始時間</th><th>利用時間</th><th>状態</th></tr>
     </thead>
     <tbody>
       {% for item in upcoming %}
@@ -26,13 +26,25 @@
         <td>{{ item['booking_date'] }}</td>
         <td>{{ item['start_time'] }}</td>
         <td>{{ item['duration_hours'] }}</td>
-        <td><span class="badge">{{ item['status'] }}</span></td>
+        <td>
+          <span class="badge">
+            {% if item['status'] == 'pending' %}
+              確認待ち
+            {% elif item['status'] == 'confirmed' %}
+              確定
+            {% elif item['status'] == 'cancelled' %}
+              キャンセル
+            {% else %}
+              {{ item['status'] }}
+            {% endif %}
+          </span>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
   {% else %}
-  <p>No upcoming bookings yet.</p>
+  <p>現在、今後の予約申請はありません。</p>
   {% endif %}
 </section>
 {% endblock %}
