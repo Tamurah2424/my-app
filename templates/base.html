@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title or 'Companion Booking MVP' }}</title>
+  <title>{{ title or '予約管理アプリ' }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a href="{{ url_for('home') }}" class="brand">Companion Booking MVP</a>
+      <a href="{{ url_for('home') }}" class="brand">予約管理アプリ</a>
       <nav>
-        <a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('admin_bookings') }}">Admin</a>
-        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('home') }}">ホーム</a>
+        <a href="{{ url_for('admin_bookings') }}">管理画面</a>
+        <a href="{{ url_for('about') }}">このサービスについて</a>
       </nav>
     </div>
   </header>
