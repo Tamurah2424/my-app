@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="center-box">
-  <p class="eyebrow">Submitted</p>
-  <h1>Your request for {{ cast['name'] }} was sent</h1>
-  <p class="subtitle">In this MVP, all bookings enter the admin queue as <strong>pending</strong>.</p>
+  <p class="eyebrow">送信完了</p>
+  <h1>{{ cast['name'] }} への予約申請を受け付けました</h1>
+  <p class="subtitle">この試作版では、すべての予約が <strong>確認待ち</strong> として管理画面に入ります。</p>
   <div class="actions center">
-    <a class="button" href="{{ url_for('home') }}">Back to home</a>
-    <a class="button secondary" href="{{ url_for('admin_bookings') }}">Open admin queue</a>
+    <a class="button" href="{{ url_for('home') }}">ホームへ戻る</a>
+    <a class="button secondary" href="{{ url_for('admin_bookings') }}">管理画面を開く</a>
   </div>
 </section>
 {% endblock %}
