@@ -2,9 +2,9 @@
 {% block content %}
 <section class="hero">
   <div>
-    <p class="eyebrow">MVP Demo</p>
-    <h1>Reservation app starter for a legal companion booking service</h1>
-    <p class="subtitle">Includes cast listing, profile pages, booking form, overlap prevention, and simple admin booking management.</p>
+    <p class="eyebrow">デモ版</p>
+    <h1>予約管理アプリのサンプル</h1>
+    <p class="subtitle">キャスト一覧、プロフィール、予約フォーム、予約重複防止、簡易管理画面を備えた試作版です。</p>
   </div>
 </section>
 
@@ -15,14 +15,14 @@
     <div class="card-body">
       <div class="row between">
         <h2>{{ cast['name'] }}</h2>
-        <span class="price">JPY {{ '{:,}'.format(cast['hourly_price']) }}/h</span>
+        <span class="price">¥{{ '{:,}'.format(cast['hourly_price']) }}/時間</span>
       </div>
-      <p>{{ cast['age'] }} years old · {{ cast['area'] }}</p>
+      <p>{{ cast['age'] }}歳 ・ {{ cast['area'] }}</p>
       <p>{{ cast['bio'] }}</p>
       <p class="tags">{{ cast['tags'] }}</p>
       <div class="actions">
-        <a class="button secondary" href="{{ url_for('cast_detail', cast_id=cast['id']) }}">View profile</a>
-        <a class="button" href="{{ url_for('book_cast', cast_id=cast['id']) }}">Book now</a>
+        <a class="button secondary" href="{{ url_for('cast_detail', cast_id=cast['id']) }}">プロフィールを見る</a>
+        <a class="button" href="{{ url_for('book_cast', cast_id=cast['id']) }}">予約する</a>
       </div>
     </div>
   </article>
