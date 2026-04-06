@@ -39,3 +39,4 @@ Then open `http://127.0.0.1:5000`.
 - Availability calendar
 - Admin authentication and audit logs
 - Automated tests
+
