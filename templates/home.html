@@ -1,32 +1,57 @@
-<!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title or '予約管理アプリ' }}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container nav">
-      <a href="{{ url_for('home') }}" class="brand">予約管理アプリ</a>
-      <nav>
-        <a href="{{ url_for('home') }}">ホーム</a>
-        <a href="{{ url_for('admin_bookings') }}">管理画面</a>
-        <a href="{{ url_for('about') }}">このサービスについて</a>
-      </nav>
-    </div>
-  </header>
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">公開デモ</p>
+    <h1>予約管理アプリのサンプルサイト</h1>
+    <p class="subtitle">
+      キャスト一覧、プロフィール確認、予約送信、簡易管理画面までをまとめた、
+      日本語UIのデモ版です。実運用前の試作として確認できます。
+    </p>
+  </div>
 
-  <main class="container page">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="flash flash-{{ category }}">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    {% block content %}{% endblock %}
-  </main>
-</body>
-</html>
+  <div class="notice-list">
+    <div class="notice">
+      <h3>予約できる</h3>
+      <p>プロフィールを見て、そのまま予約申請できます。</p>
+    </div>
+    <div class="notice">
+      <h3>重複防止</h3>
+      <p>同じ時間帯の予約が重ならないように制御しています。</p>
+    </div>
+    <div class="notice">
+      <h3>管理しやすい</h3>
+      <p>管理画面で確認待ち・確定・キャンセルを切り替えられます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-head">
+  <div>
+    <p class="eyebrow">キャスト一覧</p>
+    <h2>予約可能なキャスト</h2>
+    <p>気になるプロフィールを開いて、詳細を確認してください。</p>
+  </div>
+</section>
+
+<section class="grid cards">
+  {% for cast in casts %}
+  <article class="card">
+    <img src="{{ cast['image_url'] }}" alt="{{ cast['name'] }}" class="card-image">
+    <div class="card-body">
+      <div class="row between">
+        <h2>{{ cast['name'] }}</h2>
+        <span class="price">¥{{ '{:,}'.format(cast['hourly_price']) }}/時間</span>
+      </div>
+      <p>{{ cast['age'] }}歳 ・ {{ cast['area'] }}</p>
+      <p>{{ cast['bio'] }}</p>
+      <p class="tags">{{ cast['tags'] }}</p>
+      <div class="actions">
+        <a class="button secondary" href="{{ url_for('cast_detail', cast_id=cast['id']) }}">プロフィールを見る</a>
+        <a class="button" href="{{ url_for('book_cast', cast_id=cast['id']) }}">予約する</a>
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}
