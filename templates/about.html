@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="prose">
-  <p class="eyebrow">About this starter</p>
-  <h1>What is included</h1>
+  <p class="eyebrow">このサービスについて</p>
+  <h1>この試作版に含まれているもの</h1>
   <ul>
-    <li>Cast list and profile pages</li>
-    <li>Booking request form</li>
-    <li>Same-day overlap prevention for pending/confirmed bookings</li>
-    <li>Admin screen to confirm or cancel requests</li>
-    <li>SQLite storage</li>
+    <li>キャスト一覧ページとプロフィールページ</li>
+    <li>予約申請フォーム</li>
+    <li>同日・同時間帯の重複予約防止</li>
+    <li>予約の確定・キャンセルができる管理画面</li>
+    <li>SQLiteによるデータ保存</li>
   </ul>
 
-  <h2>Recommended next steps</h2>
+  <h2>おすすめの次の改善</h2>
   <ul>
-    <li>Add login and role-based access control</li>
-    <li>Integrate Stripe or another payments provider</li>
-    <li>Add identity checks, moderation, and reporting</li>
-    <li>Store images locally or in cloud storage instead of remote hotlinks</li>
-    <li>Move business rules into services and add automated tests</li>
+    <li>ログイン機能と権限管理の追加</li>
+    <li>Stripeなどの決済導入</li>
+    <li>本人確認、通報、監視機能の追加</li>
+    <li>画像を外部URLではなく自前保存に変更</li>
+    <li>自動テストと業務ロジック整理</li>
   </ul>
 </section>
 {% endblock %}
